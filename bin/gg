@@ -26,7 +26,10 @@ if parsed
 end
 
 t = (ARGV.count > 0 && ARGV.join(' '))
-(translator.t(URI.escape(t)) && return) if t
+if t
+  translator.t(URI.escape(t))
+  exit
+end
 
 loop do
   s = Readline::readline('> ')
