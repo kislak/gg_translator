@@ -7,9 +7,7 @@ rescue LoadError
   require 'gg_translator'
 end
 
-t = (ARGV.count > 0 && ARGV.join(' '))
 translator =  GgTranslator::Translator.new
-(translator.t(URI.escape(t)) && exit) if t
 
 require 'readline'
 require 'yaml'
@@ -26,6 +24,9 @@ if parsed
   translator.sl = parsed[:sl]
   translator.tl = parsed[:tl]
 end
+
+t = (ARGV.count > 0 && ARGV.join(' '))
+(translator.t(URI.escape(t)) && return) if t
 
 loop do
   s = Readline::readline('> ')
