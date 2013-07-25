@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'gg_translator'
+rescue LoadError
+  require 'rubygems'
+  require 'gg_translator'
+end
+
+t = (ARGV.count > 0 && ARGV.join(' '))
+translator =  GgTranslator::Translator.new
+(translator.t(URI.escape(t)) && exit) if t
+
+require 'readline'
+require 'yaml'
+require 'tmpdir'
+fname = "#{Dir::tmpdir}/google_translator.conf"
+
+
+parsed = begin
+  YAML.load(File.open(fname))
+rescue
+end
+
+if parsed
+  translator.sl = parsed[:sl]
+  translator.tl = parsed[:tl]
+end
+
+loop do
+  s = Readline::readline('> ')
+  break if s == 'exit'
+  next if (s == '') && Readline::HISTORY.to_a.last && translator.exp(Readline::HISTORY.to_a.last)
+
+  Readline::HISTORY.push(s)
+
+  if s.match(/^rv$/) || s.match(/^ch$/)
+    translator.sl, translator.tl = translator.tl, translator.sl
+    next
+  end
+
+  next if s.match(/^from /) && s.gsub!(/^from /, '') && translator.sl = s
+  next if s.match(/^into /) && s.gsub!(/^into /, '') && translator.tl = s
+  next if (s.match(/^exp /) || s == 'exp') && s.gsub!(/^exp/, '') && translator.exp(s)
+  s.split(' ').each{|w| translator.t(w)}
+end
+
+data = {
+  sl: translator.sl,
+  tl: translator.tl
+}
+
+File.open(fname, "w") {|f| f.write(data.to_yaml) }
