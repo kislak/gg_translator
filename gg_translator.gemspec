@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["kislak7@gmail.com"]
   spec.description   = %q{commandline repl translator}
   spec.summary       = %q{run: gg}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/kislak/gg_translator"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

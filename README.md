@@ -7,18 +7,14 @@ Command Line Translator
     $ gem install gg_translator
 
 ## Usage
-
-gg
-
-\> from en
-
-\> into de
-
-\> hello
-
-\> world
-
-\> exit
+    $ gg
+    > from en
+    > into de
+    > hello
+    [some output]
+    > world
+    [some output]
+    > exit
 
 commands:
 
