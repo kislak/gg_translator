@@ -23,11 +23,12 @@ end
 if parsed
   translator.sl = parsed[:sl]
   translator.tl = parsed[:tl]
+  translator.phrase_mode = parsed[:phrase_mode]
 end
 
-t = (ARGV.count > 0 && ARGV.join(' '))
-if t
-  translator.t(URI.escape(t))
+s = (ARGV.count > 0 && ARGV.join(' '))
+if s
+  translator.t(URI.escape(s))
   exit
 end
 
@@ -46,12 +47,22 @@ loop do
   next if s.match(/^from /) && s.gsub!(/^from /, '') && translator.sl = s
   next if s.match(/^into /) && s.gsub!(/^into /, '') && translator.tl = s
   next if (s.match(/^exp /) || s == 'exp') && s.gsub!(/^exp/, '') && translator.exp(s)
+
+  translator.phrase_mode = true if s.match(/^\+/) && s.gsub!(/^\+/, '')
+  translator.phrase_mode = false if s.match(/^-/) && s.gsub!(/^\-/, '')
+
+  if translator.phrase_mode
+    translator.t(URI.escape(s))
+    next
+  end
+
   s.split(' ').each{|w| translator.t(w)}
 end
 
 data = {
   sl: translator.sl,
-  tl: translator.tl
+  tl: translator.tl,
+  phrase_mode: translator.phrase_mode
 }
 
 File.open(fname, "w") {|f| f.write(data.to_yaml) }

@@ -21,7 +21,7 @@ module GgTranslator
     require 'net/http'
     require 'uri'
     require 'json'
-    attr_accessor :sl, :tl, :last
+    attr_accessor :sl, :tl, :last, :phrase_mode
 
     def initialize(sl = 'auto', tl = 'ru')
       @sl = sl

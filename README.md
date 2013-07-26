@@ -14,14 +14,21 @@ Command Line Translator
     [some output]
     > world
     [some output]
+    >+hello world
+    [some output]
+    >-hello world
+    [some output]
     > exit
+
 
 commands:
 
-* from [en|ru|de|etc...] - set source language
-* into [en|ru|de|etc...] - set destination language
-* exp  - show usage context.
+* from [en|ru|de|etc...] -- set source language
+* into [en|ru|de|etc...] -- set destination language
+* exp  -- show usage context.
 * exit
+* + -- set phrase mode
+* - -- set word mode
 
 ## Contributing
 
