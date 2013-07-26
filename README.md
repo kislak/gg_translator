@@ -1,26 +1,35 @@
 # GgTranslator
 
-TODO: Write a gem description
+Command Line Translator
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'gg_translator'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install gg_translator
 
 ## Usage
 
-TODO: Write usage instructions here
+gg
+
+\> from en
+
+\> into de
+
+\> hello
+
+\> world
+
+\> exit
+
+commands:
+
+* from [en|ru|de|etc...] - set source language
+* into [en|ru|de|etc...] - set destination language
+* exp  - show usage context.
+* exit
 
 ## Contributing
+
+[https://github.com/kislak/gg_translator](https://github.com/kislak/gg_translator)
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
