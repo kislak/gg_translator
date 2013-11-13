@@ -51,6 +51,8 @@ loop do
   translator.phrase_mode = true if s.match(/^\+/) && s.gsub!(/^\+/, '')
   translator.phrase_mode = false if s.match(/^-/) && s.gsub!(/^\-/, '')
 
+  next if s.strip == ''
+
   if translator.phrase_mode
     translator.t(URI.escape(s))
     next
